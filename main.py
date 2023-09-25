@@ -13,12 +13,12 @@ faceCascade = cv2.CascadeClassifier(
     f"{cv2.data.haarcascades}haarcascade_frontalface_default.xml"
 )
 
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 
-video_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 10000)
-video_capture.set(cv2.CAP_PROP_FRAME_WIDTH, 10000)
-h = video_capture.get(cv2.CAP_PROP_FRAME_HEIGHT)
-w = video_capture.get(cv2.CAP_PROP_FRAME_WIDTH)
+#video_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 10000)
+#video_capture.set(cv2.CAP_PROP_FRAME_WIDTH, 10000)
+h = 640#video_capture.get(cv2.CAP_PROP_FRAME_HEIGHT)
+w =80#video_capture.get(cv2.CAP_PROP_FRAME_WIDTH)
 
 while True:
     # Capture frame-by-frame
@@ -41,16 +41,29 @@ while True:
             cv2.FONT_HERSHEY_SIMPLEX,
             1,
             (0, 255, 0),
+            2
         )
         print(f"x: {x}; y: {y}")
         cv2.putText(
             frames,
             f"Count: {len(faces)}",
-            (1050,680),
+            (50,680),
             cv2.FONT_HERSHEY_SIMPLEX,
             1,
             (0, 255, 0),
+            3
         )
+        if len(faces) > 3:
+            print("Crowd detected!")
+            cv2.putText(
+                frames,
+                "Crowd Detected!",
+                (50,580),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                1,
+                (0, 255, 0),
+                3
+            )
     # Display the resulting frame
     cv2.imshow(
         f"Lapsap | Press Q to quit",
