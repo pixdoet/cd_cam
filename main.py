@@ -12,12 +12,13 @@ import getopt, sys
 h = 640
 w = 80
 usefix = False
-camera = 1
+camera = 0
+crowdSize = 3
 
 # cli arguments
 argumentList = sys.argv[1:]
-options = "hwfc:"
-long_options = ["height", "width", "usefix", "camera"]
+options = "hwfcs:"
+long_options = ["height", "width", "usefix", "camera", "size"]
 
 try:
     # Parsing argument
@@ -34,6 +35,8 @@ try:
                 usefix = True
         elif currentArgument in ("-c", "--camera"):
             camera = currentValue
+        elif currentArgument in ("-s", "--size"):
+            crowdSize = int(currentValue)
 
 except getopt.error as e:
     print(e)
@@ -82,7 +85,7 @@ while True:
         )
 
         # crowd detected!
-        if len(faces) > 3:
+        if len(faces) > crowdSize:
             print("Crowd detected!")
             cv2.putText(
                 frames,
@@ -95,7 +98,7 @@ while True:
             )
     # Display the resulting frame
     cv2.imshow(
-        f"Lapsap | Press Q to quit",
+        f"DetectCrowd PRE_ALPHA | CrowdSize {crowdSize} | Press Q to quit",
         frames,
     )
     if cv2.waitKey(1) & 0xFF == ord("q"):
