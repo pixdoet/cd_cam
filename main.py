@@ -1,5 +1,5 @@
 """
-    receive.py - server code for receiving & parsing
+receive.py - server code for receiving & parsing
 
 """
 
@@ -12,8 +12,8 @@ import getopt, sys
 h = 640
 w = 80
 usefix = False
-camera = 0
-crowdSize = 3
+camera = 2
+crowdSize = 1
 
 # cli arguments
 argumentList = sys.argv[1:]
@@ -98,7 +98,7 @@ while True:
             )
     # Display the resulting frame
     cv2.imshow(
-        f"DetectCrowd PRE_ALPHA | CrowdSize {crowdSize} | Press Q to quit",
+        f"DetectCrowd | CrowdSize {crowdSize} | Press Q to quit",
         frames,
     )
     if cv2.waitKey(1) & 0xFF == ord("q"):
